@@ -2,8 +2,7 @@
 
 | Name  | Value |
 | ------------- | ------------- |
-| Course  | Content Cell  |
-| Section  | CSCI470 - Operating Systems Design  |
+| Course  | CSCI470 - Operating Systems Design  |
 | Semester  | Spring 2024  |
 | Student  | Colin McArthur  |
 | Mav Username  | camcarthur  |
