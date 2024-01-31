@@ -7,7 +7,7 @@
 | Student  | Colin McArthur  |
 | Mav Username  | camcarthur  |
 | GitHub Username  | camcarthur  |
-| Repository  | https://github.com/camcarthur/csci470-camcarthur  |
+| Repository  | https://github.com/camcarthur/os-camcarthur  |
 
 # Assignments
 
