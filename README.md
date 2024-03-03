@@ -14,3 +14,4 @@
 | Assignment | Due Date | Done | Location | Notes |
 | ---------- | -------- | ---- | -------- | ----- |
 | PID | 1/31/2024 | Done | https://github.com/camcarthur/os-camcarthur/tree/main/pid | In Class Activity |
+| Model Using Fork |  | Done | https://github.com/camcarthur/os-camcarthur/tree/main/fork |Simulate probabilities of a coin flip using fork|
