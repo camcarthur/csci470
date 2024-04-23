@@ -1,5 +1,6 @@
 # Dockerfile
 Create a dockerfile that hosts a filesystem.  Setup ACLs for the appropriate users
+
 GPT
 
 Creating a Dockerfile that hosts a filesystem and sets up Access Control Lists (ACLs) for specific users involves several steps. The basic concept is to create a Docker container with a filesystem, configure users/groups, and apply ACLs for those users/groups. Here's a Dockerfile that achieves this:
@@ -57,8 +58,10 @@ docker build -t acl-container .
 docker run -it acl-container
 ```
 Once inside the container, you can create files and directories within /my_filesystem and verify the ACL settings with the getfacl command. This approach allows you to manage user access and permissions within the Docker container, enabling flexible and secure file management.
+
 User
 why is the -s shell option set to /bin/bash?
+
 GPT
 
 The -s option in the useradd command specifies the default shell for a newly created user. When you set -s /bin/bash, you're setting Bash as the default shell for that user. Here's why this is significant:
@@ -81,8 +84,10 @@ The -s option in the useradd command specifies the default shell for a newly cre
 In the Dockerfile example I provided earlier, setting the default shell to /bin/bash gives you more flexibility when interacting with the container. This is especially useful for testing ACLs, creating files, and running various shell commands to validate the environment.
 
 If you don't explicitly set the shell for a user, it might default to /bin/sh, which is more limited in terms of features compared to Bash. If you require advanced scripting, interactivity, or compatibility, specifying Bash with the -s option ensures that the user has access to these features.
+
 User
 why is -m necessary for useradd 
+
 GPT
 
 The -m option with useradd is used to create a home directory for the new user. This is an important aspect of user creation for several reasons:
@@ -105,10 +110,11 @@ The -m option with useradd is used to create a home directory for the new user. 
 In the Docker context, using -m is especially useful when creating a user for a containerized environment. It ensures that the user has a dedicated space to work with, allowing for better organization and isolation within the container.
 
 Without the -m option, the new user would not have a home directory, leading to potential issues with configuration, file storage, and user environment setup. It's a critical step in creating a fully functional user in Linux systems.
+
 User
 is -m still necessary if we manually create directories for the user?
-GPT
 
+GPT
 If you manually create a home directory for a user and set the appropriate ownership and permissions, the -m option in useradd is not strictly necessary. However, there are a few considerations when you choose to manually create directories instead of using -m:
 
     Consistency:
@@ -132,10 +138,11 @@ That said, if you have a specific reason for manually creating a directory (like
 Skipping the -m option could be useful in specialized scenarios, such as when the home directory should be located in a non-standard location or when you're implementing custom user setups in Docker containers.
 
 In general, using -m is the recommended approach for its simplicity, consistency, and error prevention. If you manually create directories, make sure to follow best practices to avoid security or configuration issues.
+
 User
 will the -m automatically pull from the ubuntu 22.04 /etc/skel even though it hasn't been configured in the Dockerfile?
-GPT
 
+GPT
 Yes, when using the -m option with useradd, it automatically pulls from /etc/skel to create the home directory, even if you haven't explicitly mentioned /etc/skel in the Dockerfile. Here's why this happens:
 
     Default Behavior: The -m option in useradd is designed to create the user's home directory, and the default behavior on most Linux distributions, including Ubuntu 22.04, is to copy configuration files from /etc/skel into the new home directory.
@@ -153,10 +160,11 @@ Even in a Docker environment, where the filesystem is isolated within the contai
 This default behavior is designed to streamline the user creation process and reduce the need for manual setup steps. You can rely on it to create a new user with a basic environment, even in a Docker container.
 
 If you want to customize the contents of /etc/skel, you can add specific configuration files or scripts to it before running useradd -m. This allows you to define default setups for new users in a Docker context or other environments where user creation might be needed.
+
 User
 why are there 4 acl rules instead of just 2? couldn't the same thing be accomplished with just the last 2 rules?
-GPT
 
+GPT
 In the Dockerfile example that set up a filesystem with ACLs, I provided 4 setfacl rules to achieve full control for a user and a group while ensuring the correct default behavior for future files and directories:
 
 ```dockerfile
