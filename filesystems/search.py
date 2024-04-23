@@ -1,22 +1,35 @@
-import os
-import fnmatch
+from pathlib import Path
 
-def find_files_with_suffix(start_directory, suffix):
-    result = []
-    for dirpath, dirnames, filenames in os.walk(start_directory):
-        # Use glob-style pattern matching to find files with the specific suffix
-        pattern = f"*{suffix}"
-        
-        for filename in fnmatch.filter(filenames, pattern):
-            full_path = os.path.join(dirpath, filename)
-            result.append(full_path)
+inputDir = input("Input the path for the directory you wish to search \n")
+searchDir = Path(inputDir)
+suffix = input("Input the suffix you wish to search for (ex: .c, .cpp) \n")
 
-    return result
+visited = set()
 
-# Example usage
-start_directory = input("Enter the path of the directory you would like to start at\n")
-suffix = input("Enter the suffix you want to search for (ex: .txt, .jpeg, .cpp)\n")
-files = find_files_with_suffix(start_directory, suffix)
 
-for file in files:
-    print("Found:", file)
+def findFiles(path, suffix):
+    # if path has been visited then skip 
+    if path in visited:
+        return []
+    
+# mark as visited
+    visited.add(path)
+
+    matchingFiles = list (path.glob(f'*{suffix}'))
+
+    # recursivelly check subdirectories while avoiding symlinks which can cause cycles
+    for subdir in path.iterdir():
+        if subdir.is_dir() and not subdir.is_symlink():
+            matchingFiles.extend(findFiles(subdir, suffix))
+
+    return matchingFiles
+
+matchingFiles = findFiles(searchDir, suffix)
+
+print(f"Files found with suffix {suffix} :")
+if matchingFiles:
+    for file_path in matchingFiles:
+        print(file_path)
+
+else:
+    print(f"No files found \n")
