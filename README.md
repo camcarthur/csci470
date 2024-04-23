@@ -15,4 +15,5 @@
 | ---------- | -------- | ---- | -------- | ----- |
 | PID | 1/31/2024 | Done | https://github.com/camcarthur/os-camcarthur/tree/main/pid | In Class Activity |
 | Model Using Fork |  | Done | https://github.com/camcarthur/os-camcarthur/tree/main/fork |Simulate probabilities of a coin flip using fork|
-| PID |  | Done | https://github.com/camcarthur/os-camcarthur/tree/main/memory | Server sends message to client once connected |
+| Memory |  | Done | https://github.com/camcarthur/os-camcarthur/tree/main/memory | Server sends message to client once connected |
+| Filesystem |   | IP | https://github.com/camcarthur/os-camcarthur/tree/main/filesystems | The Dockerfile creates a container running ubuntu and then creates a filesystem with ACLs. The python file performs a recursive seach from an inputed directory to find all files with a specified suffix |
