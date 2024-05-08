@@ -1,4 +1,4 @@
-// Using threads to log to a file concurrently
+// Using threads to log my name to a file without overwriting or interference
 // based on code in chat.md
 
 #include <iostream>
@@ -14,7 +14,7 @@ ofstream logFile("log.txt");
 void writeLog(int threadId) {
     lock_guard<mutex> lock(mtx); //
     logFile << "Thread " << threadId << " grabs the mutex" << endl;
-    logFile << "Thread " << threadId << " is logging some information" << endl;
+    logFile << "Thread " << threadId << ": Colin McArthur" << endl;
     logFile << "Mutex dropped" << endl;
 }
 
